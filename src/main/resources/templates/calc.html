@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+	<div>
+		<p th:text="${calc}">階乗の計算をします.</p>
+	</div>
+	
+	 <form action="/calc" method="POST">
+	 <label><br>階乗したい値を入れてください</label><input type="text" name="calcVal">
+	 <input type="submit" value="送信">
+	 </form>
+	 
+</body>
+</html>

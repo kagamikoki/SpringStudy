@@ -28,4 +28,42 @@ public class MainController{
 	mv.setViewName("index");
 	return mv;
 	}
+	
+	@RequestMapping(value="/calc" , method=RequestMethod.GET)
+	public ModelAndView calc(ModelAndView mv) {
+		mv.addObject("calc","階乗の計算をします。");
+		mv.setViewName("calc");
+		return mv;
+	}
+	
+	@RequestMapping(value="/calc" , method=RequestMethod.POST)
+	public ModelAndView indexPost(ModelAndView mv , 
+	@RequestParam("calcVal")int calc){
+	
+		int total = 0;
+		for(int i=1; i<=calc; i++) {
+			total += i;
+			};
+			
+	mv.addObject("calc",  calc + "の階乗は" + total + "です。");
+	return mv;
+	}
+	
+	
+	@RequestMapping(value="/ifstudy" , method=RequestMethod.GET)
+	public ModelAndView ifget(ModelAndView mv) {
+		mv.addObject("suzuki", false);
+		mv.setViewName("if");
+		return mv;
+	}
+	
+	@RequestMapping(value="/ifstudy" , method=RequestMethod.POST)
+	public ModelAndView ifpost(ModelAndView mv) {
+		mv.addObject("suzuki", true);
+		mv.setViewName("if");
+		return mv;
+	}
+	
+	
+	
 }
