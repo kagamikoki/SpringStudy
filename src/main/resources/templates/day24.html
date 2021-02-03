@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day24</title>
+</head>
+<body>
+  <form method="post" action="/day24" th:object = "${dayform}">
+  <h1>登録</h1>
+  	<label>名前</label><input type="text" name="name">
+  	<label>メールアドレス</label><input type="text" name="mail">
+  	<label><input type="radio" name="mf" value="male">男性</label>
+	<label><input type="radio" name="mf" value="female">女性</label>
+	<label></label> 
+	<select name="birthday">
+		<option>1月</option>
+		<option>2月</option>
+		<option>3月</option>
+		<option>4月</option>
+		<option>5月</option>
+		<option>6月</option>
+		<option>7月</option>
+		<option>8月</option>
+		<option>9月</option>
+		<option>10月</option>
+		<option>11月</option>
+		<option>12月</option>	
+	 </select>
+	 <select name="country">
+		<option>United States</option>
+		<option>United Kingdom</option>
+		<option>Itary</option>
+		<option>Netherlands</option>
+		<option>Canada</option>
+		<option>Greece</option>
+		<option>Jamaica</option>
+		<option>Singapore</option>
+		<option>Korea</option>
+		<option>China</option>
+		<option>Germany</option>
+		<option>Japan</option>	
+		<option>New Zealand</option>
+		<option>Brazil</option>
+		<option>France</option>
+		<option>Bulgaria</option>
+		<option>Peru</option>
+		<option>Portugal</option>
+		<option>Mexico</option>
+		<option>Monaco</option>
+	 </select> 
+	<input type="submit" value="登録">
+  </form>
+  
+  	
+</body>
+</html>

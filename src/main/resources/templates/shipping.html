@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <title>Shipping</title>
+</head>
+<body>
+ 	 <div>	
+		<h2>送料を調べる</h2>
+	</div>
+	
+	 <h3>性別を選んでください</h3>
+	 <form action="/shipping" method="POST">
+	 <label><input type="radio" name="radiobutton" value="male">男性</label>
+	 <label><input type="radio" name="radiobutton" value="female">女性</label>
+	 
+	 <h3>年齢を選んでください</h3>
+	 <select name="Age">
+	 	<option value="10">~10代</option>
+	 	<option value="30">20~30代</option>
+	 	<option value="60">40~60代</option>
+	 	<option value="70">70代~</option>	
+	 </select>
+	 
+	 <h3>発地</h3>
+	 <select name="origin">
+	 	<option value="北海道">北海道</option>
+	 	<option value="東北地方">東北地方</option>
+	 	<option value="関東地方">関東地方</option>
+	 	<option value="中部地方">中部地方</option>
+	 	<option value="近畿地方">近畿地方</option>
+	 	<option value="中国地方">中国地方</option>
+	 	<option value="四国">四国</option>
+	 	<option value="九州">九州</option>
+	 	<option value="沖縄">沖縄</option>
+	 </select>
+	 <br>
+	 
+	  <h3>着地</h3>
+	 <select name="destination">
+	 	<option value="北海道">北海道</option>
+	 	<option value="東北地方">東北地方</option>
+	 	<option value="関東地方">関東地方</option>
+	 	<option value="中部地方">中部地方</option>
+	 	<option value="近畿地方">近畿地方</option>
+	 	<option value="中国地方">中国地方</option>
+	 	<option value="四国">四国</option>
+	 	<option value="九州">九州</option>
+	 	<option value="沖縄">沖縄</option>
+	 </select>
+	 <br>
+	 <br>
+	 <input type="submit" value="検索">
+	 
+	 </form>
+	 <p>送料は</p>
+	 <p th:text="${shipping}">こちら</p>
+	 
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<h1>登録データ</h1>
+  	<table>
+  	<form method ="post" action="/mypage/" th:object = "${customers}">
+	  	<input type="hidden" name="id" th:value = "*{id}">
+  		<tr><td><label>名前</label></td>
+	  	<td><input type="text" name="name" th:value="*{name}"></td></tr>
+		<tr><td><label>メールアドレス</label></td>
+		<td><input type="text" name="mail" th:value="*{mail}"></td></tr>
+		<tr><td><label>性別</label></td>
+		<td><input type="text" name="mf" th:value="*{mf}"></td></tr>
+		<tr><td><label>誕生日</label></td>
+		<td><input type="text" name="birthday" th:value="*{birthday}"></td></tr>
+		<tr><td><label>国</label></td>
+		<td><input type="text" name="country" th:value="*{country}"></td></tr>
+		<td><input type="submit" value="更新"></td></tr>
+	 </form>
+  	</table> 
+	 <form method="post" action="/delete/">
+	 <input type="hidden" name="idvalue" th:value="${id}">
+	 <input type="submit" value="削除"></form>
+  
+</body>
+</html>

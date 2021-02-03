@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2ch 掲示板</title>
+</head>
+<body>
+  <form method="post" action="/channel" th:object = "${formModel}">
+	  <h1>投稿する</h1>
+	  <label>名前</label><input type="text" name="name" placeholder="名前(省略可)">
+	  <label>メールアドレス</label><input type="text" name="mail" placeholder="メールアドレス(省略可)">
+	  <label></label><input type="text" name="comment" placeholder="コメント内容">
+	  <input type="submit" value="書き込む">
+  </form>
+  
+  <h1>2チャンネル</h1>
+	  <table>
+		  <tr><th>投稿番号</th><th>名前</th><th>コメント</th><th>時間</th></tr>
+		  <tr th:each="c : ${customers}">
+		  <td th:text="${c.id}"></td>
+		  <td>匿名</td>
+		  <td th:text="${c.comment}"></td>
+		  <td th:text="${c.time}"></td>
+		  </tr>
+	  </table>
+	  
+</body>
+</html>
