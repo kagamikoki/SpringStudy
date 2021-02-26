@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface day24DataRepository extends
 JpaRepository<day24Data, Long>{
-	public Optional<day24Data> findByIdNot(long id);
+	
 }

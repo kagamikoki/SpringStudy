@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface db_exampleRepository extends
-	JpaRepository<db_example, Long>{
-		
-	}
+public interface db_exampleRepository extends 
+JpaRepository<db_example, Long>{
+	}  

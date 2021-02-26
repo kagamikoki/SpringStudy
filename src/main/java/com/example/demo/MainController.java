@@ -15,8 +15,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -304,35 +302,90 @@ public class MainController{
 		return new ModelAndView("redirect:/day24");
 	}
 	
+	
+	
 	@Autowired
 	db_exampleRepository hrepository;
 	
+	@Autowired
+	memberDataRepository mrepository;
+	
 	@RequestMapping(value="/household" , method = RequestMethod.GET)
-	public ModelAndView householdGet(@ModelAttribute("houseform")db_example db , ModelAndView mv) {
+	public ModelAndView householdGet(@ModelAttribute("houseform")db_example db ,@ModelAttribute("memberform")memberData memberData , ModelAndView mv) {
 		List<db_example> customer = hrepository.findAll();
+		List<memberData> client = mrepository.findById(1);
+		
 		mv.addObject("customer" , customer );
 		mv.addObject("houseform", db);
+		mv.addObject("memberform", memberData);
+		mv.addObject("client" , client);
+		
 		mv.setViewName("household");
 		return mv;
 	}
 	
 	
 	@RequestMapping(value="/household" , method = RequestMethod.POST)
-	public ModelAndView householdPost(@ModelAttribute("houseform") @Validated db_example db_example , BindingResult result ,RedirectAttributes attributes ,ModelAndView mv ) {
+	public ModelAndView householdPost(
+		@ModelAttribute("houseform")@Validated db_example db_example ,
+		@ModelAttribute("memberform")memberData memberData ,
+		BindingResult result ,RedirectAttributes attributes ,
+		ModelAndView mv ){
 	
-		if(result.hasErrors()) {
+			//バリデーション
+			if(result.hasErrors()) {
+				List<db_example> customer = hrepository.findAll();
+				List<memberData> client = mrepository.findById(1);
+				
+				db_example.setMemberData(client.get(0));
+				
+				hrepository.saveAndFlush(db_example);
+				
+				mv.addObject("houseform",db_example);
+				mv.addObject("customer" , customer );
+				mv.addObject("memberform", memberData);
+				mv.addObject("client" , client);
+				
+				mv.setViewName("/household");
+				return mv;
+			}
+		
+		
 			List<db_example> customer = hrepository.findAll();
+			List<memberData> client = mrepository.findById(1);
+			
+			db_example.setMemberData(client.get(0));
+			
+			hrepository.saveAndFlush(db_example);
+			
+			
 			mv.addObject("houseform",db_example);
 			mv.addObject("customer" , customer );
-			mv.setViewName("/household");
-			return mv;
+			mv.addObject("memberform", memberData);
+			mv.addObject("client" , client);
+			
+			return new ModelAndView("redirect:/household");
 		}
-		hrepository.saveAndFlush(db_example);
-		return new ModelAndView("redirect:/household");
-	}
-
-	}
 	
+	
+	@RequestMapping(value="/member" , method = RequestMethod.GET)
+	public ModelAndView memberGet(@ModelAttribute("memberform")memberData memberData ,ModelAndView mv) {
+		List<memberData> client = mrepository.findAll();
+		mv.addObject("client" , client );
+		mv.addObject("memberform", memberData);
+		mv.setViewName("member");
+		return mv;
+	} 
+	
+	@RequestMapping(value="/member" , method = RequestMethod.POST)
+	public ModelAndView membePost(@ModelAttribute("memberform") memberData memberData ,ModelAndView mv) {
+		mrepository.saveAndFlush(memberData);
+		
+		return new ModelAndView("redirect:/household");
+	} 
+
+	
+	}
 	
 	
 	//@Valid db_example db_example, →　入力されたデータの検証するためのアノテーション

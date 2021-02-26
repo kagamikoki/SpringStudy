@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
@@ -12,7 +14,8 @@ import javax.validation.constraints.Positive;
 public class db_example{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column private long id;
+	@Column 
+	private long id;
 	
 	@Column ( nullable = false)
 	@NotEmpty (message = "どちらかを選択してください")
@@ -27,20 +30,9 @@ public class db_example{
 	@Column (length = 20 , nullable = true)
 	private String detail;
 	
-	@Column ( nullable = false)
+	@Column ( nullable = true)
 	@NotEmpty (message = "カテゴリを選択してください")
 	private String category;
-	
-//	@AssertTrue(message = "１以上の数を入力してください")
-//	public boolean isValidprice() {
-//		return( price > 0);
-//	}
-	
-//	@AssertTrue(message = "数字以外を入力しないでください")
-//	public boolean Vaildprice() {
-//		return(price = String);
-//	}
-	
 	
 	public long getId() {return id;}
 	public void setId(long id) {this.id = id;}
@@ -56,4 +48,13 @@ public class db_example{
 	
 	public String getCategory() {return category;}
 	public void setCategory(String category) {this.category = category;}
-}
+	
+	//リレーション
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(nullable = false,insertable=false, updatable=false)
+	public memberData memberData;
+
+	public memberData getMemberData() {return memberData;}
+	public void setMemberData(memberData memberData) {this.memberData = memberData;}
+	
+	}

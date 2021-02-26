@@ -39,11 +39,12 @@
   
   <h2></h2>
   	<table>
-  		<tr><th>収支</th><th>カテゴリー</th><th>金額</th></tr>
+  		<tr><th>収支</th><th>カテゴリー</th><th>金額</th><th>メンバー</th></tr>
   		<tr th:each="c : ${customer}">
   			<td th:text="${c.expenditure}"></td>
   			<td th:text="${c.category}"></td>
   			<td th:text="${c.price}"></td>
+  			<td th:text="${c.memberData.id}"></td>
   		</tr>
   	</table>
 </body>
