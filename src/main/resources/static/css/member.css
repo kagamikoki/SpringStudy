@@ -95,3 +95,27 @@ form {
 .form-footer a:hover {
   border-bottom: 1px dotted #8c8c8c;
 }
+
+
+input[type="radio"] 
+  /* display: none */
+.button-style-label {
+  display : inline-block;
+  background: lightgray;
+  padding: 5px;
+  border-radius: 5px;
+  min-width: 100px;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.button-style-label:hover {
+  opacity: .8;
+}
+input[type="radio"]:checked + .button-style-label {
+  background: red;
+}
+input[type="radio"]:disabled + .button-style-label {
+  opacity: .4;
+  cursor: default;
+}

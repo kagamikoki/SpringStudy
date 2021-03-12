@@ -3,47 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link th:href="@{/css/house.css}" rel="stylesheet">
+  <link th:href="@{/css/member.css}" rel="stylesheet">
   <title>家計簿</title>
 </head>
 <body>
-  <form method="post" action="#" th:action="@{/household}" th:object="${houseform}">
-    <h2>入力</h2>
-    <label>収入</label><input type="radio" name="expenditure" value="on">
-    <label>支出</label><input type="radio" name="expenditure" value="off">
-  <P th:if="${#fields.hasErrors('expenditure')}" th:errors="*{expenditure}"></P> 
-    <label>金額</label>
-    <input type="text" name="price"  placeholder="金額を入力">
-  <P th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></P> 
-    <label></label><input type="text" name="detail"  placeholder="内容を入力">
-	<!-- <label></label> 日付を入れる  -->
-    <select name="category" >
-    	<option>食費</option>
-    	<option>日用品費</option>
-    	<option>光熱費</option>
-    	<option>通信費</option>
-    	<option>趣味・娯楽費</option>
-    	<option>衣服費</option>
-    	<option>交通費</option>
-    	<option>美容費</option>
-    	<option>交際費</option>
-    	<option>家賃</option>
-    	<option>保険費</option>
-    	<option>奨学金</option>
-    	<option>自動車費</option>
-    	<option>特別な支出</option>
-    	<option>その他・未分類</option>
-    </select>
-    <input type="submit" value="登録">
-  </form>
+
+	<div class="form-wrapper">
+	
+		<form method="post" action="#" th:action="@{/household}" th:object="${houseform}">
+	
+			<h1>入力</h1>
+			
+			<div class="form-item">
+					<label>収入</label><input type="radio" name="expenditure" value="on">
+					<label>支出</label><input type="radio" name="expenditure" value="off">
+					<P th:if="${#fields.hasErrors('expenditure')}" th:errors="*{expenditure}"></P> 
+			</div>
+
+			<div class="form-item">
+				<label>金額</label><input type="text" name="price" placeholder="金額を入力">
+				<P th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></P>
+			</div>
+			
+			<div class="form-item">
+				<label>日付</label><input name="date" type="date">
+			</div>
+		 
+			<div class="form-item">
+				<label>内容</label><input type="text" name="detail"  placeholder="内容を入力">
+			</div>
+			
+			<div class="form-item">
+
+				<select name="category" >
+					<option>食費</option>
+					<option>日用品費</option>
+					<option>光熱費</option>
+					<option>通信費</option>
+					<option>趣味・娯楽費</option>
+					<option>衣服費</option>
+					<option>交通費</option>
+					<option>美容費</option>
+					<option>交際費</option>
+					<option>家賃</option>
+					<option>保険費</option>
+					<option>奨学金</option>
+					<option>自動車費</option>
+					<option>特別な支出</option>
+					<option>その他・未分類</option>
+				</select>
+			</div>
+
+			<div class="button-panel">
+				<input type="submit" value="登録">
+			</div>
+			
+		</form>
+	</div>
   
   <h2></h2>
   	<table>
-  		<tr><th>収支</th><th>カテゴリー</th><th>金額</th><th>メンバー</th></tr>
+  		<tr><th>収支</th><th>カテゴリー</th><th>金額</th><th>日付</th><th>メンバー</th></tr>
   		<tr th:each="c : ${customer}">
   			<td th:text="${c.expenditure}"></td>
   			<td th:text="${c.category}"></td>
   			<td th:text="${c.price}"></td>
+  			<td th:text="${c.date}"></td>
   			<td th:text="${c.memberData.id}"></td>
   		</tr>
   	</table>

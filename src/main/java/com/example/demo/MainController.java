@@ -223,8 +223,25 @@ public class MainController{
 	}
 	
 	@RequestMapping(value="/user", method = RequestMethod.POST)
-	public ModelAndView indexPost(@ModelAttribute("formModel") UserData 
-			userData, ModelAndView mv) {
+	public ModelAndView indexPost(
+			@ModelAttribute("formModel") @Validated UserData userData, 
+			BindingResult result , RedirectAttributes attributes , 
+			ModelAndView mv) {
+		
+		if(result.hasErrors()) {
+			
+			List<UserData> customers = repository.findAll();
+			
+			mv.addObject("formModel" , userData);
+			mv.addObject("customers" , customers );
+			
+			setFlashAttributeErrors(attributes, result);
+			
+			mv.setViewName("user");
+			return mv;
+		}
+		
+		
 		repository.saveAndFlush(userData);
 		return new ModelAndView("redirect:/user");
 	}
@@ -311,7 +328,10 @@ public class MainController{
 	memberDataRepository mrepository;
 	
 	@RequestMapping(value="/household" , method = RequestMethod.GET)
-	public ModelAndView householdGet(@ModelAttribute("houseform")db_example db ,@ModelAttribute("memberform")memberData memberData , ModelAndView mv) {
+	public ModelAndView householdGet(
+			@ModelAttribute("houseform")db_example db ,
+			@ModelAttribute("memberform")memberData memberData ,ModelAndView mv) {
+		
 		List<db_example> customer = hrepository.findAll();
 		List<memberData> client = mrepository.findById(1);
 		
@@ -328,7 +348,7 @@ public class MainController{
 	@RequestMapping(value="/household" , method = RequestMethod.POST)
 	public ModelAndView householdPost(
 		@ModelAttribute("houseform")@Validated db_example db_example ,
-		@ModelAttribute("memberform")memberData memberData ,
+		@ModelAttribute("memberform") @Validated memberData memberData ,
 		BindingResult result ,RedirectAttributes attributes ,
 		ModelAndView mv ){
 	
@@ -337,17 +357,16 @@ public class MainController{
 				List<db_example> customer = hrepository.findAll();
 				List<memberData> client = mrepository.findById(1);
 				
-				db_example.setMemberData(client.get(0));
-				
-				hrepository.saveAndFlush(db_example);
-				
 				mv.addObject("houseform",db_example);
 				mv.addObject("customer" , customer );
 				mv.addObject("memberform", memberData);
 				mv.addObject("client" , client);
 				
+				setFlashAttributeErrors(attributes, result);
+				
 				mv.setViewName("/household");
 				return mv;
+				
 			}
 		
 		
@@ -368,6 +387,11 @@ public class MainController{
 		}
 	
 	
+	private void setFlashAttributeErrors(RedirectAttributes attributes, BindingResult result) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
 	@RequestMapping(value="/member" , method = RequestMethod.GET)
 	public ModelAndView memberGet(@ModelAttribute("memberform")memberData memberData ,ModelAndView mv) {
 		List<memberData> client = mrepository.findAll();
@@ -392,7 +416,7 @@ public class MainController{
 	//BindingResult bindingResultは、入力されたデータと検証結果（エラーがあるかどうか）を保持するためのアノテーション
 	//bindingResult.hasErrors()が書かれているif文では、エラーがあるかどうかを確認
 	//⇨もしエラーがある場合、householdをエラーメッセージと入力されていた値と共に再描画する
-		
+	//RedirectAttributes リダイレクト先にパラメータとして渡す
 	
 
 

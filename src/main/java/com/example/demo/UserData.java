@@ -1,5 +1,6 @@
 package com.example.demo;
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 
 @Entity
 @Table
@@ -17,7 +18,9 @@ public class UserData {
 	private String pass;
 	
 	@Column(length = 20, nullable = false)
+	@Positive (message = "1以上の数字を入力してください")
 	private int age;
+	
 	
 	public long getId() { return id;}
 	public void setId(long id) {this.id = id; }

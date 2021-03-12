@@ -27,6 +27,9 @@ public class db_example{
 	@Pattern (regexp="[0-9]*"  , message= "数字のみを入力してください")
 	private String price;
 	
+	@Column(nullable = false)
+	private String date;
+	
 	@Column (length = 20 , nullable = true)
 	private String detail;
 	
@@ -43,6 +46,9 @@ public class db_example{
 	public String getPrice() {return price;}
 	public void setPrice(String price) {this.price = price;}
 	
+	public String getDate() {return date;}
+	public void setDate(String date) {this.date = date;}
+	
 	public String getDetail() {return detail;}
 	public void setDetail(String detail) {this.detail = detail;}
 	
@@ -51,7 +57,6 @@ public class db_example{
 	
 	//リレーション
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(nullable = false,insertable=false, updatable=false)
 	public memberData memberData;
 
 	public memberData getMemberData() {return memberData;}
