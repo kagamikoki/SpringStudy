@@ -348,8 +348,8 @@ public class MainController{
 	@RequestMapping(value="/household" , method = RequestMethod.POST)
 	public ModelAndView householdPost(
 		@ModelAttribute("houseform")@Validated db_example db_example ,
-		@ModelAttribute("memberform") @Validated memberData memberData ,
 		BindingResult result ,RedirectAttributes attributes ,
+		@ModelAttribute("memberform") memberData memberData ,
 		ModelAndView mv ){
 	
 			//バリデーション
