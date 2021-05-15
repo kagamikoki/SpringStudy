@@ -28,6 +28,7 @@ public class db_example{
 	private String price;
 	
 	@Column(nullable = false)
+	@NotEmpty (message = "日付を選択してください")
 	private String date;
 	
 	@Column (length = 20 , nullable = true)

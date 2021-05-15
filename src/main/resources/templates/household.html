@@ -17,16 +17,17 @@
 			<div class="form-item">
 					<label>収入</label><input type="radio" name="expenditure" value="on">
 					<label>支出</label><input type="radio" name="expenditure" value="off">
-					<P th:if="${#fields.hasErrors('expenditure')}" th:errors="*{expenditure}"></P> 
+					<P th:if="${#fields.hasErrors('expenditure')}" th:errors="*{expenditure}" class="error"></P> 
 			</div>
 
 			<div class="form-item">
 				<label>金額</label><input type="text" name="price" placeholder="金額を入力">
-				<P th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></P>
+				<P th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error"></P>
 			</div>
 			
 			<div class="form-item">
 				<label>日付</label><input name="date" type="date">
+				<P th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="error"></P>
 			</div>
 		 
 			<div class="form-item">
